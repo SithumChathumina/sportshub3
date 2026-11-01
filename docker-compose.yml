@@ -1,0 +1,10 @@
+services:
+  sportshub:
+    build: .
+    ports:
+      - "8080:3000"
+    volumes:
+      - sportshub_db:/var/lib/mysql
+
+volumes:
+  sportshub_db:
