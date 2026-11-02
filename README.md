@@ -58,21 +58,6 @@ A sports club management system for the Web and Mobile Application Development f
 
 Change or remove demo accounts before a real production deployment.
 
-## Run with Docker
-
-Docker Compose runs Apache/PHP and MariaDB in one demo container and keeps database data in a named volume.
-
-```bash
-docker compose up --build
-```
-
-Open `http://localhost:8080`. To stop, press Ctrl+C. To remove the demo database volume as well:
-
-```bash
-docker compose down -v
-```
-
-The Dockerfile listens on port `3000` inside the container for platform compatibility. For normal shared PHP hosting, use the XAMPP/phpMyAdmin steps instead; Docker is not required.
 
 ## Deploy to PHP/MySQL shared hosting
 
