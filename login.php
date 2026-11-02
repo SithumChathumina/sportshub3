@@ -48,24 +48,29 @@ include __DIR__ . '/includes/header.php';
         <div class="auth-layout">
             <div class="auth-intro">
                 <span class="hero-kicker">Welcome back</span>
-                <h1>Ready for the next session?</h1>
+                <h1>Ready for the next session?
+                </h1>
                 <p>Log in to manage your clubs, registrations and bookings. Administrators can use the same form to reach the admin panel.</p>
-                <div class="demo-note mt-4"><strong>Demo student</strong><br>student@nsbm.lk<br>Student@123<br><br><strong>Demo admin</strong><br>admin@nsbm.lk<br>Admin@123</div>
+                <div class="demo-note mt-4"><strong>Demo student</strong><br>student@nsbm.lk<br>Student@123<br><br><strong>Demo admin</strong><br>admin@nsbm.lk<br>Admin@123
+                </div>
             </div>
             <div class="auth-form">
-                <h2 class="mb-4">Log in to SportsHub</h2>
-                <?php if ($error): ?><div class="alert alert-danger" role="alert"><?= e($error) ?></div><?php endif; ?>
+                <h2 class="mb-4">Log in to SportsHub
+                </h2>
+                <?php if ($error): ?>                <div class="alert alert-danger" role="alert"><?= e($error) ?>                </div><?php endif; ?>
                 <form method="post" class="needs-validation" novalidate>
                     <?= csrf_field() ?>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
                         <input type="email" class="form-control" id="email" name="email" value="<?= e($email) ?>" autocomplete="email" required>
-                        <div class="invalid-feedback">Enter a valid email address.</div>
+                        <div class="invalid-feedback">Enter a valid email address.
+                        </div>
                     </div>
                     <div class="mb-4">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" autocomplete="current-password" required>
-                        <div class="invalid-feedback">Enter your password.</div>
+                        <div class="invalid-feedback">Enter your password.
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-sport w-100">Log in</button>
                 </form>

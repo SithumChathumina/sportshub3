@@ -1,47 +1,53 @@
 <?php
-function e(?string $value): string
+function e($value)
 {
-    return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8');
+    return htmlspecialchars((string) ($value ?? ''), ENT_QUOTES, 'UTF-8');
 }
 
-function url(string $path = ''): string
+function url($path = '')
 {
     return BASE_PATH . '/' . ltrim($path, '/');
 }
 
-function asset(string $path): string
+function asset($path)
 {
     return url('assets/' . ltrim($path, '/'));
 }
 
-function redirect(string $path): never
+function redirect($path)
 {
-    header('Location: ' . (str_starts_with($path, 'http') ? $path : url($path)));
+    header('Location: ' . url($path));
     exit;
 }
 
-function fetch_all(string $sql, array $params = []): array
+function fetch_all($sql, $params = [])
 {
-    $statement = db()->prepare($sql);
+    global $connection;
+    // Placeholders keep submitted values separate from the SQL command.
+    $statement = $connection->prepare($sql);
     $statement->execute($params);
     return $statement->fetchAll();
 }
 
-function fetch_one(string $sql, array $params = []): array|false
+function fetch_one($sql, $params = [])
 {
-    $statement = db()->prepare($sql);
+    global $connection;
+    // Placeholders keep submitted values separate from the SQL command.
+    $statement = $connection->prepare($sql);
     $statement->execute($params);
     return $statement->fetch();
 }
 
-function run_query(string $sql, array $params = []): PDOStatement
+function run_query($sql, $params = [])
 {
-    $statement = db()->prepare($sql);
+    global $connection;
+    // Placeholders keep submitted values separate from the SQL command.
+    $statement = $connection->prepare($sql);
     $statement->execute($params);
     return $statement;
 }
 
-function csrf_token(): string
+function csrf_token()
 {
     if (empty($_SESSION['csrf_token'])) {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -49,12 +55,12 @@ function csrf_token(): string
     return $_SESSION['csrf_token'];
 }
 
-function csrf_field(): string
+function csrf_field()
 {
     return '<input type="hidden" name="csrf_token" value="' . e(csrf_token()) . '">';
 }
 
-function verify_csrf(): void
+function verify_csrf()
 {
     $token = $_POST['csrf_token'] ?? '';
     if (!$token || !hash_equals($_SESSION['csrf_token'] ?? '', $token)) {
@@ -63,29 +69,29 @@ function verify_csrf(): void
     }
 }
 
-function flash(string $type, string $message): void
+function flash($type, $message)
 {
     $_SESSION['flash'][] = ['type' => $type, 'message' => $message];
 }
 
-function get_flashes(): array
+function get_flashes()
 {
     $messages = $_SESSION['flash'] ?? [];
     unset($_SESSION['flash']);
     return $messages;
 }
 
-function format_date(?string $date, string $format = 'd M Y'): string
+function format_date($date, $format = 'd M Y')
 {
     return $date ? date($format, strtotime($date)) : 'Not set';
 }
 
-function format_time(?string $time): string
+function format_time($time)
 {
     return $time ? date('g:i A', strtotime($time)) : 'Not set';
 }
 
-function status_badge(string $status): string
+function status_badge($status)
 {
     $classes = [
         'approved' => 'success', 'active' => 'success', 'completed' => 'success',
@@ -98,12 +104,12 @@ function status_badge(string $status): string
     return '<span class="badge text-bg-' . $class . '">' . e(ucfirst($status)) . '</span>';
 }
 
-function active_class(string $page, string $activePage): string
+function active_class($page, $activePage)
 {
     return $page === $activePage ? 'active' : '';
 }
 
-function client_validation(): string
+function client_validation()
 {
     return 'needs-validation';
 }

@@ -1,30 +1,33 @@
-// SportsHub shared browser behaviour.
-document.addEventListener('DOMContentLoaded', () => {
-    // Bootstrap client-side validation. Server-side checks still run on every form.
-    document.querySelectorAll('.needs-validation').forEach((form) => {
-        form.addEventListener('submit', (event) => {
-            if (!form.checkValidity()) {
+// Run this after the page has loaded.
+document.addEventListener('DOMContentLoaded', function () {
+    var forms = document.querySelectorAll('.needs-validation');
+    for (var i = 0; i < forms.length; i++) {
+        forms[i].addEventListener('submit', function (event) {
+            if (!this.checkValidity()) {
                 event.preventDefault();
                 event.stopPropagation();
             }
-            form.classList.add('was-validated');
+            this.classList.add('was-validated');
         });
-    });
+    }
 
-    // Ask before destructive or irreversible actions.
-    document.querySelectorAll('[data-confirm]').forEach((element) => {
-        element.addEventListener('click', (event) => {
-            if (!window.confirm(element.dataset.confirm)) {
+    // Ask before deleting a record or cancelling a registration.
+    var buttons = document.querySelectorAll('[data-confirm]');
+    for (var j = 0; j < buttons.length; j++) {
+        buttons[j].addEventListener('click', function (event) {
+            if (!window.confirm(this.getAttribute('data-confirm'))) {
                 event.preventDefault();
             }
         });
-    });
+    }
 
-    // Set booking date minimums without relying only on HTML validation.
-    const today = new Date();
-    const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
-        .toISOString().split('T')[0];
-    document.querySelectorAll('input[data-future-date]').forEach((input) => {
-        input.min = localToday;
-    });
+    // Use the local calendar date as the earliest booking date.
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var day = ('0' + today.getDate()).slice(-2);
+    var dateInputs = document.querySelectorAll('input[data-future-date]');
+    for (var k = 0; k < dateInputs.length; k++) {
+        dateInputs[k].min = year + '-' + month + '-' + day;
+    }
 });

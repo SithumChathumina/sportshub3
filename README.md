@@ -1,104 +1,72 @@
-# NSBM SportsHub
+# NSBM SportsHub — PHP and MySQL version
 
-A sports club management system for the Web and Mobile Application Development final project (Topic 3). It uses **HTML, CSS, JavaScript, PHP and MySQL**, with Bootstrap 5 for responsive UI components.
+Sports club management system for Topic 3 of the NSBM Web and Mobile Application Development project.
 
-## Included features
+## Requirements
 
-### Public
-- Homepage with live club and fixture information
-- Club search and sport filtering
-- Club details and related training/fixtures
-- Upcoming match fixtures
-- Results and simple standings
+- XAMPP with PHP 8.x, Apache and MySQL/MariaDB
+- A web browser
+- An internet connection for the existing Bootstrap and Google Fonts links
 
-### Student
-- Registration, secure login and logout
-- Request club membership
-- View training schedules from approved clubs
-- Register for tournaments and matches
-- Withdraw event registrations
-- Request facilities/equipment and cancel bookings
-- View personal participation history
+The project uses HTML, CSS, JavaScript, PHP and MySQL. Bootstrap is retained for the existing responsive design. No container, Node.js build, Composer installation or environment-variable configuration is needed.
 
-### Administrator
-- Dashboard with pending work and key counts
-- Full CRUD for clubs, training sessions, tournaments, matches and resources
-- Approve/reject club memberships
-- Record match scores and update match status
-- Approve/reject booking requests with conflict checks
-- Participation and performance reports
-- Download club/student participation reports as CSV
+## Start on your PC
 
-## Technology and security
+1. Back up your existing `htdocs/sportshub3` folder and export your existing database using phpMyAdmin.
+2. Extract the supplied `sportshub3` folder into `C:/xampp/htdocs/`.
+3. Open XAMPP and start Apache and MySQL.
+4. For a NEW demo database only, open `http://localhost/phpmyadmin` and import `database/sportshub.sql`.
+5. Open `http://localhost/sportshub3/index.php`.
 
-- PHP 8.1+ with PDO prepared statements
-- MySQL 8 or MariaDB 10.6+
-- `password_hash()` and `password_verify()` for passwords
-- Session regeneration after login and basic login throttling
-- CSRF tokens on state-changing forms
-- Server-side validation and escaped HTML output
-- Foreign keys and unique constraints in MySQL
-- Bootstrap client-side validation as an additional layer
+**The SQL script drops and recreates the SportsHub tables. Importing it deletes existing SportsHub records. If you already have a working `sportshub3_db`, keep that database and skip step 4.** The schema was not changed by this refactor.
 
-## Run with XAMPP (beginner-friendly)
+Database settings are in `config/database.php`. Defaults: host `localhost`, database `sportshub3_db`, username `root`, empty password. If you change the folder name or use hosting, also edit `BASE_PATH` in `includes/init.php`.
 
-1. Copy this folder into `xampp/htdocs/sportshub`.
-2. Start **Apache** and **MySQL** in XAMPP.
-3. Open `http://localhost/phpmyadmin` and import `database/sportshub.sql`.
-4. The SQL creates the `sportshub` database, tables and sample data.
-5. If your MySQL details are not `root` with no password, update `config/database.php` or set the environment variables shown in `.env.example`.
-6. Open `http://localhost/sportshub/`.
+## Demo accounts
 
-### Demo accounts
+These are the credentials documented in the supplied seed data; login must be tested on your XAMPP installation.
 
 | Role | Email | Password |
 | --- | --- | --- |
-| Student | `student@nsbm.lk` | `Student@123` |
-| Admin | `admin@nsbm.lk` | `Admin@123` |
+| Admin | admin@nsbm.lk | Admin@123 |
+| Student | student@nsbm.lk | Student@123 |
 
-Change or remove demo accounts before a real production deployment.
+Remove or change demo accounts before allowing real users to access the application.
 
+## Features retained in the source
 
-## Deploy to PHP/MySQL shared hosting
+- Public club search, club details, fixtures, results and standings
+- Student registration, login, membership requests and training schedule
+- Match and tournament registrations and withdrawals
+- Facility/equipment booking requests, cancellations and history
+- Admin management of clubs, memberships, sessions, tournaments, matches and resources
+- Scores, booking approvals, participation/performance reports and CSV exports
 
-1. Create a MySQL database and database user in the hosting control panel.
-2. Import `database/sportshub.sql` using the host's phpMyAdmin. If the host does not allow `CREATE DATABASE`, remove those two statements and select the created database before importing.
-3. Upload all project files to `public_html` (or a subfolder).
-4. Set `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` and `DB_PASS` in the hosting environment, or update the defaults in `config/database.php` locally before upload. Do not commit real passwords.
-5. Test registration, login, admin CRUD and student requests over HTTPS.
-6. Put the public URL in your project report. The preview supplied with this source is not a public deployment.
+## Folder guide
 
-## Project structure
+| Path | Purpose |
+| --- | --- |
+| `config/database.php` | Database credentials and PDO connection |
+| `includes/init.php` | Start the session, set the URL path, load shared files |
+| `includes/functions.php` | Database queries, safe output, messages and dates |
+| `includes/auth.php` | Identify the signed-in user and check their role |
+| `includes/header.php`, `includes/footer.php` | Shared page layout |
+| `admin/` | Admin forms and reports |
+| `student/` | Student dashboard and forms |
+| `assets/` | Existing CSS, simplified JavaScript and supplied favicon |
+| `database/sportshub.sql` | Original schema and sample data |
 
-```text
-admin/                 Admin dashboard and management pages
-student/               Student dashboard and personal features
-assets/css/            Custom responsive styling
-assets/js/             Validation and confirmation behaviour
-config/                PDO database connection
-includes/              Sessions, authentication, helpers and layout
-database/sportshub.sql Database schema and demo records
-index.php              Public homepage
-clubs.php              Club search/listing
-fixtures.php           Upcoming fixtures
-results.php            Results and standings
-Dockerfile             Demo container build
-CONTRIBUTING.md        Six-member GitHub workflow
-```
+See `CODE_GUIDE.md` for explanations and `VERIFICATION.md` for checks and the XAMPP test checklist.
 
-## Team testing checklist
+## Live hosting for submission
 
-- Register a new student and log in.
-- Request a club; approve it as admin; confirm training appears for the student.
-- Create and edit a club, training session, tournament and match.
-- Register for an event and verify it in participation history.
-- Request a resource and approve/reject it as admin.
-- Enter a score and check the public results/standings page.
-- Download both CSV reports.
-- Test at mobile and desktop widths.
+The assignment requires a live URL as well as the GitHub repository. XAMPP is your local development setup.
 
-## Third-party resources
+1. Choose a host that supports PHP 8.x, PDO MySQL, sessions and MySQL/MariaDB.
+2. Create a database and user in the hosting control panel.
+3. For a new hosted demo database, select that database before importing the SQL and remove the `CREATE DATABASE` and `USE` statements if the host requires its own database name.
+4. Update all four settings in `config/database.php` with the host's values. Keep real passwords out of public Git history.
+5. Upload the project to the document root and set `BASE_PATH` to `''`. For a subfolder, use its path instead.
+6. Use HTTPS and test the student/admin flows before adding the URL to your report.
 
-- Bootstrap 5.3.3 (MIT) via jsDelivr
-- Barlow Condensed (SIL Open Font License) and Inter (SIL Open Font License) via Google Fonts
-- All SportsHub PHP, CSS, JavaScript and inline SVG illustrations were created for this project
+The rewritten files have not been deployed by this task.

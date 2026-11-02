@@ -10,7 +10,7 @@ Clone your existing repository and copy the SportsHub source into it. Do not cop
 git clone YOUR_REPOSITORY_URL
 cd YOUR_REPOSITORY_FOLDER
 # Copy the SportsHub files here, then:
-git add README.md CONTRIBUTING.md .gitignore .env.example database config includes Dockerfile docker-compose.yml .dockerignore docker
+git add README.md CONTRIBUTING.md database config includes
 git commit -m "Set up SportsHub database and shared application structure"
 git push origin main
 ```

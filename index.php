@@ -16,7 +16,8 @@ include __DIR__ . '/includes/header.php';
         <div class="hero-grid">
             <div>
                 <span class="hero-kicker">Your campus. Your game.</span>
-                <h1 class="hero-title">Find your team.<br><span>Play your part.</span></h1>
+                <h1 class="hero-title">Find your team.<br><span>Play your part.</span>
+                </h1>
                 <p class="hero-copy">Join an NSBM sports club, keep up with training, enter tournaments and book the facilities you need — without the paperwork.</p>
                 <div class="hero-actions">
                     <a class="btn btn-highlight btn-lg" href="<?= e(url('clubs.php')) ?>">Explore sports clubs</a>
@@ -56,36 +57,42 @@ include __DIR__ . '/includes/header.php';
 <section class="section" aria-labelledby="whats-on-title">
     <div class="container">
         <div class="section-heading">
-            <div><span class="section-kicker">This semester</span><h2 id="whats-on-title">What’s on at SportsHub</h2></div>
+            <div><span class="section-kicker">This semester</span>
+                <h2 id="whats-on-title">What’s on at SportsHub
+                </h2>
+            </div>
             <p>Live information from the club database, not another noticeboard.</p>
         </div>
         <div class="bento-grid">
             <article class="info-tile info-tile-dark bento-main">
                 <span class="section-kicker">Next fixture</span>
                 <?php if ($nextMatch): ?>
-                    <h3><?= e($nextMatch['home_team']) ?><br>vs <?= e($nextMatch['away_team']) ?></h3>
+            <h3><?= e($nextMatch['home_team']) ?><br>vs <?= e($nextMatch['away_team']) ?>            </h3>
                     <p><?= e($nextMatch['sport']) ?> · <?= e($nextMatch['venue']) ?></p>
                     <span class="big-number"><?= format_date($nextMatch['match_datetime'], 'd M') ?></span>
                     <p><?= format_time($nextMatch['match_datetime']) ?></p>
                     <a class="btn btn-highlight" href="<?= e(url('fixtures.php')) ?>">View all fixtures</a>
                 <?php else: ?>
-                    <h3>No fixtures scheduled yet</h3><p>Check back soon for the next game.</p>
+            <h3>No fixtures scheduled yet
+            </h3><p>Check back soon for the next game.</p>
                 <?php endif; ?>
             </article>
             <article class="info-tile info-tile-green">
                 <span class="big-number"><?= $clubCount ?></span>
-                <h3>Active sports clubs</h3>
+            <h3>Active sports clubs
+            </h3>
                 <p><?= $memberCount ?> approved memberships and room for new players.</p>
                 <a class="link-arrow" href="<?= e(url('clubs.php')) ?>">Find your club</a>
             </article>
             <article class="info-tile">
                 <span class="section-kicker">Next tournament</span>
                 <?php if ($nextTournament): ?>
-                    <h3><?= e($nextTournament['name']) ?></h3>
+            <h3><?= e($nextTournament['name']) ?>            </h3>
                     <p><?= format_date($nextTournament['start_date']) ?> · <?= e($nextTournament['venue']) ?></p>
                     <a class="link-arrow" href="<?= e(url('student/registrations.php')) ?>">Register to take part</a>
                 <?php else: ?>
-                    <h3>New tournaments coming soon</h3>
+            <h3>New tournaments coming soon
+            </h3>
                 <?php endif; ?>
             </article>
         </div>
@@ -95,16 +102,20 @@ include __DIR__ . '/includes/header.php';
 <section class="section pt-0" aria-labelledby="featured-clubs-title">
     <div class="container">
         <div class="section-heading">
-            <div><span class="section-kicker">Pick your sport</span><h2 id="featured-clubs-title">Clubs at NSBM</h2></div>
+            <div><span class="section-kicker">Pick your sport</span>
+                <h2 id="featured-clubs-title">Clubs at NSBM
+                </h2>
+            </div>
             <a class="link-arrow" href="<?= e(url('clubs.php')) ?>">Browse every club</a>
         </div>
         <div class="club-grid">
             <?php foreach ($featuredClubs as $index => $club): ?>
                 <a class="club-card" href="<?= e(url('club.php?id=' . $club['id'])) ?>">
                     <span class="club-number">CLUB <?= str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) ?></span>
-                    <h3><?= e($club['name']) ?></h3>
+            <h3><?= e($club['name']) ?>            </h3>
                     <p><?= e(substr($club['description'], 0, 110)) ?>…</p>
-                    <div class="club-meta"><span><?= e($club['meeting_day']) ?>s</span><span><?= e($club['location']) ?></span></div>
+            <div class="club-meta"><span><?= e($club['meeting_day']) ?>s</span><span><?= e($club['location']) ?></span>
+            </div>
                 </a>
             <?php endforeach; ?>
         </div>
@@ -113,11 +124,22 @@ include __DIR__ . '/includes/header.php';
 
 <section class="section section-dark" aria-labelledby="how-title">
     <div class="container">
-        <div class="section-heading"><div><span class="section-kicker">Get started</span><h2 id="how-title">From sign-up to game day</h2></div></div>
+        <div class="section-heading">
+            <div><span class="section-kicker">Get started</span>
+                <h2 id="how-title">From sign-up to game day
+                </h2>
+            </div>
+        </div>
         <div class="steps">
-            <article class="step"><h3>Create your account</h3><p>Use your NSBM student ID and email to register securely.</p></article>
-            <article class="step"><h3>Join a club</h3><p>Send a membership request and the sports admin will review it.</p></article>
-            <article class="step"><h3>Show up and play</h3><p>Follow your schedule, enter events and track your participation.</p></article>
+            <article class="step">
+            <h3>Create your account
+            </h3><p>Use your NSBM student ID and email to register securely.</p></article>
+            <article class="step">
+            <h3>Join a club
+            </h3><p>Send a membership request and the sports admin will review it.</p></article>
+            <article class="step">
+            <h3>Show up and play
+            </h3><p>Follow your schedule, enter events and track your participation.</p></article>
         </div>
     </div>
 </section>

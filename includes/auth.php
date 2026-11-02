@@ -1,32 +1,30 @@
 <?php
-function current_user(): ?array
+function current_user()
 {
     if (empty($_SESSION['user_id'])) {
         return null;
     }
 
-    static $user = null;
-    if ($user === null) {
-        $user = fetch_one('SELECT id, student_id, full_name, email, role FROM users WHERE id = ?', [$_SESSION['user_id']]);
-        if (!$user) {
-            session_destroy();
-            return null;
-        }
+    // Load the account so role changes take effect on the next request.
+    $user = fetch_one('SELECT id, student_id, full_name, email, role FROM users WHERE id = ?', [$_SESSION['user_id']]);
+    if (!$user) {
+        session_destroy();
+        return null;
     }
     return $user;
 }
 
-function is_logged_in(): bool
+function is_logged_in()
 {
     return current_user() !== null;
 }
 
-function is_admin(): bool
+function is_admin()
 {
     return (current_user()['role'] ?? '') === 'admin';
 }
 
-function require_login(): void
+function require_login()
 {
     if (!is_logged_in()) {
         flash('warning', 'Please log in to continue.');
@@ -34,7 +32,7 @@ function require_login(): void
     }
 }
 
-function require_student(): void
+function require_student()
 {
     require_login();
     if (is_admin()) {
@@ -42,7 +40,7 @@ function require_student(): void
     }
 }
 
-function require_admin(): void
+function require_admin()
 {
     require_login();
     if (!is_admin()) {
