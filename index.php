@@ -19,8 +19,8 @@ include __DIR__ . '/includes/header.php';
                 <h1 class="hero-title">Find your team.<br><span>Play your part.</span></h1>
                 <p class="hero-copy">Join an NSBM sports club, keep up with training, enter tournaments and book the facilities you need — without the paperwork.</p>
                 <div class="hero-actions">
-                    <a class="btn btn-highlight btn-lg" href="<?= e(url('clubs.php')) ?>">Explore sports clubs</a>
-                    <a class="text-link" href="<?= e(url('fixtures.php')) ?>">See upcoming fixtures →</a>
+                    <a class="btn btn-highlight btn-lg" href="clubs.php">Explore sports clubs</a>
+                    <a class="text-link" href="fixtures.php">See upcoming fixtures →</a>
                 </div>
             </div>
             <figure class="hero-visual">
@@ -49,6 +49,9 @@ include __DIR__ . '/includes/header.php';
         <div class="ticker-track">
             <span>CRICKET · FOOTBALL · BASKETBALL · BADMINTON · RUGBY · ATHLETICS ·&nbsp;</span>
             <span>CRICKET · FOOTBALL · BASKETBALL · BADMINTON · RUGBY · ATHLETICS ·&nbsp;</span>
+            <span>CRICKET · FOOTBALL · BASKETBALL · BADMINTON · RUGBY · ATHLETICS ·&nbsp;</span>
+            <span>CRICKET · FOOTBALL · BASKETBALL · BADMINTON · RUGBY · ATHLETICS ·&nbsp;</span>
+            
         </div>
     </div>
 </section>
